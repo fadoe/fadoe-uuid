@@ -1,19 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FaDoe\Uuid\Exception;
 
-/**
- * Class InvalidArgumentException
- *
- * @package FaDoe\Uuid\Exception
- */
-class InvalidArgumentException extends \InvalidArgumentException implements Exception
+use InvalidArgumentException as BaseInvalidArgumentException;
+
+final class InvalidArgumentException extends BaseInvalidArgumentException implements Exception
 {
-    /**
-     * @param string $id
-     *
-     * @return InvalidArgumentException
-     */
     public static function invalidId(string $id): self
     {
         $msg = sprintf('Invalid uuid "%s"', $id);

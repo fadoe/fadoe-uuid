@@ -1,12 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FaDoe\Uuid;
 
-/**
- * Class UuidStub
- *
- * @package FaDoe\Uuid
- */
 class UuidStub extends UuidId
 {
 }

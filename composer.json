@@ -2,28 +2,31 @@
     "name": "fadoe/uuid",
     "description": "Abstract class for id value objects used in DDD.",
     "type": "library",
-    "require": {
-        "ramsey/uuid": "^3.7"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^7.0"
-    },
     "license": "BSD-3-Clause",
+    "minimum-stability": "stable",
     "authors": [
         {
-            "name": "Falk Döring",
-            "email": "falk.doering@fadoe.de"
+            "name": "Falk Döring"
         }
     ],
-    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.0",
+        "ramsey/uuid": "^4.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
     "autoload": {
         "psr-4": {
-            "FaDoe\\Uuid\\": "src"
+            "FaDoe\\Uuid\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "FaDoe\\Uuid\\": "tests"
+            "FaDoe\\Uuid\\": "test/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }

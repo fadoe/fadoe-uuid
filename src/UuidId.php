@@ -1,28 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FaDoe\Uuid;
 
+use Exception;
+use FaDoe\Uuid\Exception\GenerateUuidException;
 use FaDoe\Uuid\Exception\InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
+use Stringable;
 
 /**
  * Class UuidId
  *
  * @package FaDoe\Uuid
  */
-abstract class UuidId
+abstract class UuidId implements Stringable
 {
     /**
-     * @var string
+     * Create UUID from string
      */
-    private $string;
-
-    /**
-     * @param string $string
-     *
-     * @return static
-     */
-    public static function fromString(string $string): self
+    public static function fromString(string $string): static
     {
         if (false === Uuid::isValid($string)) {
             throw InvalidArgumentException::invalidId($string);
@@ -32,36 +30,28 @@ abstract class UuidId
     }
 
     /**
-     * @return static
+     * Generate UUID
      */
-    public static function generate(): self
+    public static function generate(): static
     {
-        return static::fromString(Uuid::uuid4()->toString());
+        try {
+            return static::fromString(Uuid::uuid4()->toString());
+        } catch (Exception $exception) {
+            throw new GenerateUuidException('Unable to generate Uuid', null, $exception);
+        }
     }
 
-    /**
-     * @return string
-     */
-    public function toString()
+    public function toString(): string
     {
         return $this->string;
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->string;
     }
 
-    /**
-     * UuidId constructor.
-     *
-     * @param $string
-     */
-    private function __construct($string)
+    private function __construct(private string $string)
     {
-        $this->string = (string) $string;
     }
 }
